@@ -22,6 +22,13 @@ public class JdbcSaisonDao implements SaisonDao {
     }
 
     @Override
+    public Saison findById(String id) {
+        String query = "Select * from saisons where id = ?";
+        return this.jdbcTemplate.queryForObject(query,
+                (rs, rowNum) -> new Saison(rs.getString("id"), rs.getString("libelle")), id);
+    }
+
+    @Override
     public void creerSaison(Saison saison) {
         String query = "INSERT INTO saisons (id, libelle) VALUES (?,?)";
         this.jdbcTemplate.update(query, saison.getId(), saison.getLibelle());

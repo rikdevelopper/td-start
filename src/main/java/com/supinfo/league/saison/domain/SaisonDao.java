@@ -7,4 +7,6 @@ public interface SaisonDao {
     boolean exists(String libelle);
 
     String nextId();
+
+    Saison findById(String id);
 }
